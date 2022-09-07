@@ -168,8 +168,6 @@ public class Scanner
     {
         while (Peek() != '"' && !_isEnd)
         {
-            // TODO: If the lexeme was passed by arguments instead of recalculated on the AddToken method
-            // I could potencially alter the lexeme here to change the \n to a space char, for example
             if (Peek() == '\n')
                 _line++;
             Advance();
