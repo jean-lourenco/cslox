@@ -44,6 +44,11 @@ public static class LoxEntryPoint
         }
     }
 
+    public static void RunDebugPrompt()
+    {
+        throw new System.NotImplementedException();
+    }
+
     public static void Error(int line, string message)
     {
         Report(line, "", message);

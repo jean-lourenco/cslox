@@ -1,4 +1,5 @@
 ﻿using Lox;
+using Lox.Ast;
 
 if (args.Length == 0)
 {
@@ -8,6 +9,8 @@ else if (args.Length == 1)
 {
     if (args[0] == "--help")
         LoxEntryPoint.RunHelp();
+    else if (args[0] == "--debug")
+        LoxEntryPoint.RunDebugPrompt();
     else
         LoxEntryPoint.RunFile(args[0]);
 }
