@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Text.RegularExpressions;
-
 namespace Lox;
 
 public enum TokenType
