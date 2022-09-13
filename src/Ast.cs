@@ -2,10 +2,10 @@ namespace Lox.Ast;
 
 public interface IVisitor<T>
 {
-    T visitBinaryExpr(Binary expr);
-    T visitGroupingExpr(Grouping expr);
-    T visitLiteralExpr(Literal expr);
-    T visitUnaryExpr(Unary expr);
+    T VisitBinaryExpr(BinaryExpr expr);
+    T VisitGroupingExpr(GroupingExpr expr);
+    T VisitLiteralExpr(LiteralExpr expr);
+    T VisitUnaryExpr(UnaryExpr expr);
 }
 
 public abstract record Expr()
@@ -13,22 +13,22 @@ public abstract record Expr()
     public abstract T Accept<T>(IVisitor<T> visitor);
 }
 
-public record Binary(Expr left, Token op, Expr right) : Expr
+public record BinaryExpr(Expr Left, Token Op, Expr Right) : Expr
 {
-    public override T Accept<T>(IVisitor<T> visitor) => visitor.visitBinaryExpr(this);
+    public override T Accept<T>(IVisitor<T> visitor) => visitor.VisitBinaryExpr(this);
 }
 
-public record Grouping(Expr expr) : Expr
+public record GroupingExpr(Expr Expr) : Expr
 {
-    public override T Accept<T>(IVisitor<T> visitor) => visitor.visitGroupingExpr(this);
+    public override T Accept<T>(IVisitor<T> visitor) => visitor.VisitGroupingExpr(this);
 }
 
-public record Literal(object value) : Expr
+public record LiteralExpr(object? Value) : Expr
 {
-    public override T Accept<T>(IVisitor<T> visitor) => visitor.visitLiteralExpr(this);
+    public override T Accept<T>(IVisitor<T> visitor) => visitor.VisitLiteralExpr(this);
 }
 
-public record Unary(Token op, Expr right) : Expr
+public record UnaryExpr(Token Op, Expr Right) : Expr
 {
-    public override T Accept<T>(IVisitor<T> visitor) => visitor.visitUnaryExpr(this);
+    public override T Accept<T>(IVisitor<T> visitor) => visitor.VisitUnaryExpr(this);
 }
