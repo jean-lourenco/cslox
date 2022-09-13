@@ -5,3 +5,5 @@
 [ ] Support escaping " in strings
 [ ] Test multiline strings
 [ ] Test that the interpreter doesnt accept dot terminated numbers
+[ ] Book Challenge: Implement /**/ comments, with nesting support
+[ ] Interpret comments to allow parsing of documentation
