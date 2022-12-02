@@ -1,5 +1,4 @@
-﻿using Lox;
-using Lox.Ast;
+using Lox;
 
 if (args.Length == 0)
 {
