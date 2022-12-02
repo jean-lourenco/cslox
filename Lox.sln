@@ -1,19 +1,24 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30114.105
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lox", "src\Lox.csproj", "{4B38B5FE-D533-410B-9913-9E2EE843602F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lox", "src\Lox.csproj", "{4B38B5FE-D533-410B-9913-9E2EE843602F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoxTests", "tests\LoxTests.csproj", "{6735580F-4D18-4ABA-9E0C-F5AA8B2F98AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoxTests", "tests\LoxTests.csproj", "{6735580F-4D18-4ABA-9E0C-F5AA8B2F98AA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BD7ED3DB-B7DB-4580-8184-4F5338EAA4B9}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+		makefile = makefile
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{4B38B5FE-D533-410B-9913-9E2EE843602F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -24,5 +29,11 @@ Global
 		{6735580F-4D18-4ABA-9E0C-F5AA8B2F98AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6735580F-4D18-4ABA-9E0C-F5AA8B2F98AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6735580F-4D18-4ABA-9E0C-F5AA8B2F98AA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2D314F0F-FCEF-424D-80C0-E5CD228957FD}
 	EndGlobalSection
 EndGlobal
