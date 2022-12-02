@@ -2,7 +2,7 @@ using System.Text;
 
 namespace Lox;
 
-public static class LoxEntryPoint
+public static class LoxInterpreter
 {
     private static bool _hadError;
 

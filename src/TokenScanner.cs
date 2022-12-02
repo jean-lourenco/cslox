@@ -113,7 +113,7 @@ public class Scanner
                 else if (IsAlpha(c))
                     ProcessIdentifier();
                 else
-                    LoxEntryPoint.Error(_line, $"Unexpected character {c}");
+                    LoxInterpreter.Error(_line, $"Unexpected character {c}");
 
                 break;
         };
@@ -159,7 +159,7 @@ public class Scanner
 
         if (_isEnd)
         {
-            LoxEntryPoint.Error(_line, "Unterminated String");
+            LoxInterpreter.Error(_line, "Unterminated String");
             return;
         }
 
@@ -187,7 +187,7 @@ public class Scanner
 
         if (!success)
         {
-            LoxEntryPoint.Error(_line, $"Could not convert to number the expression {raw}");
+            LoxInterpreter.Error(_line, $"Could not convert to number the expression {raw}");
             return;
         }
 
