@@ -108,6 +108,8 @@ public class Scanner
             case '/':
                 if (Match('/'))
                 {
+                    // TODO: aqui provavelmente precisa contar uma linha ao chegar no /n
+                    // Mesmo se o scanner ignora os comentários, eles ainda contam no número de linhas
                     while (Peek() != '\n' && !_isEnd)
                         Advance();
                 }
