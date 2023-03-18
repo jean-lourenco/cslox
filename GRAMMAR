@@ -1,5 +1,6 @@
 expression -> comma
-comma - > equality ("," equality)*
+comma -> conditional ("," conditional)*
+conditional -> equality ("?" expression ":" conditional)?
 equality -> comparision(("==" | "!=") comparision)*
 comparision -> term ((">" | "<" | ">=" | "<=") term)*
 term -> factor(("+" | "-") factor)*

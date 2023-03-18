@@ -15,4 +15,7 @@ public class AstPrinter : IVisitor<string>
 
     public string VisitUnaryExpr(UnaryExpr expr) =>
         $"({expr.Op.Lexeme} {expr.Right.Accept(this)})";
+
+    public string VisitConditional(ConditionalExpr expr) =>
+        $"(if ({expr.Condition.Accept(this)}) then ({expr.Then.Accept(this)}) else ({expr.Else.Accept(this)}))";
 }

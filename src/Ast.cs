@@ -6,6 +6,7 @@ public interface IVisitor<T>
     T VisitGroupingExpr(GroupingExpr expr);
     T VisitLiteralExpr(LiteralExpr expr);
     T VisitUnaryExpr(UnaryExpr expr);
+    T VisitConditional(ConditionalExpr expr);
 }
 
 public abstract record Expr()
@@ -31,4 +32,9 @@ public record LiteralExpr(object? Value) : Expr
 public record UnaryExpr(Token Op, Expr Right) : Expr
 {
     public override T Accept<T>(IVisitor<T> visitor) => visitor.VisitUnaryExpr(this);
+}
+
+public record ConditionalExpr(Expr Condition, Expr Then, Expr Else) : Expr
+{
+    public override T Accept<T>(IVisitor<T> visitor) => visitor.VisitConditional(this);
 }

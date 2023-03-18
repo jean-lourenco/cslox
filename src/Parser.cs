@@ -34,7 +34,7 @@ public class Parser
     private bool Check(params TokenType[] types) => !IsAtEnd() && types.Where(x => Peek().Type == x).Any();
 
     private Expr Expression() => Comma();
-    private Expr Comma() => MakeBinaryMatch(Equality, TokenType.Comma);
+    private Expr Comma() => MakeBinaryMatch(Conditional, TokenType.Comma);
     private Expr Equality() => MakeBinaryMatch(Comparision, TokenType.BangEqual, TokenType.EqualEqual);
     private Expr Comparision() => MakeBinaryMatch(Term, TokenType.Greater, TokenType.GreaterEqual, TokenType.Less, TokenType.LessEqual);
     private Expr Term() => MakeBinaryMatch(Factor, TokenType.Plus, TokenType.Minus);
@@ -50,6 +50,21 @@ public class Parser
         }
 
         return Primary();
+    }
+
+    private Expr Conditional()
+    {
+        var expr = Equality();
+
+        if (Match(TokenType.Question))
+        {
+            var then = Expression();
+            Consume(TokenType.Comma, "Expect ':' after then branch of conditional expression.");
+            var @else = Conditional();
+            expr = new ConditionalExpr(expr, then, @else);
+        }
+
+        return expr;
     }
 
     private Expr Primary()
