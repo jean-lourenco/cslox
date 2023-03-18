@@ -59,7 +59,7 @@ public class Parser
         if (Match(TokenType.Question))
         {
             var then = Expression();
-            Consume(TokenType.Comma, "Expect ':' after then branch of conditional expression.");
+            Consume(TokenType.Colon, "Expect ':' after then branch of conditional expression.");
             var @else = Conditional();
             expr = new ConditionalExpr(expr, then, @else);
         }

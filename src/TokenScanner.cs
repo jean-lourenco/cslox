@@ -4,7 +4,7 @@ public enum TokenType
 {
     // Single character tokens
     LeftParen, RightParen, LeftBrace, RightBrace,
-    Comma, Dot, Minus, Plus, Semicolon, Slash, Star, Question,
+    Comma, Dot, Minus, Plus, Semicolon, Slash, Star, Question, Colon,
 
     // One or two tokens
     Bang, BangEqual, Equal, EqualEqual,
@@ -86,6 +86,8 @@ public class Scanner
             case '+': AddToken(TokenType.Plus); break;
             case ';': AddToken(TokenType.Semicolon); break;
             case '*': AddToken(TokenType.Star); break;
+            case '?': AddToken(TokenType.Question); break;
+            case ':': AddToken(TokenType.Colon); break;
             case '!': AddToken(Match('=') ? TokenType.BangEqual : TokenType.Bang); break;
             case '=': AddToken(Match('=') ? TokenType.EqualEqual : TokenType.Equal); break;
             case '>': AddToken(Match('=') ? TokenType.GreaterEqual : TokenType.Greater); break;
@@ -93,8 +95,6 @@ public class Scanner
             case '/':
                 if (Match('/'))
                 {
-                    // TODO: aqui provavelmente precisa contar uma linha ao chegar no /n
-                    // Mesmo se o scanner ignora os comentários, eles ainda contam no número de linhas
                     while (Peek() != '\n' && !_isEnd)
                         Advance();
                 }
