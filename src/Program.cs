@@ -18,4 +18,3 @@ else
     LoxInterpreter.RunHelp();
     Environment.Exit(64);
 }
-
