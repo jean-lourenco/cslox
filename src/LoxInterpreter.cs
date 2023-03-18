@@ -1,4 +1,5 @@
 using System.Text;
+using Lox.Ast;
 
 namespace Lox;
 
@@ -37,11 +38,13 @@ public static class LoxInterpreter
     {
         Console.WriteLine("Running the program: " + program);
         var scanner = new Scanner(program);
+        var parser = new Parser(scanner.ScanTokens().ToList());
+        var astPrinter = new AstPrinter();
 
-        foreach (var token in scanner.ScanTokens())
-        {
-            Console.WriteLine(token);
-        }
+        // TODO: Tentar converter Scan e Parser em IEnumerable
+        // TODO: Considerar criar uma função Parse ao invés de chamar Expression
+
+        Console.WriteLine(astPrinter.Print(parser.Expression()));
     }
 
     public static void RunDebugPrompt()
@@ -52,6 +55,14 @@ public static class LoxInterpreter
     public static void Error(int line, string message)
     {
         Report(line, "", message);
+    }
+
+    public static void Error(Token token, string message)
+    {
+        if (token.Type == TokenType.EOF)
+            Report(token.Line, "at end", message);
+        else
+            Report(token.Line, $"at '{token.Lexeme}'", message);
     }
 
     public static void Report(int line, string where, string message)
