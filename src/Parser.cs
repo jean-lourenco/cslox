@@ -33,7 +33,8 @@ public class Parser
     private bool Check(TokenType type) => !IsAtEnd() && Peek().Type == type;
     private bool Check(params TokenType[] types) => !IsAtEnd() && types.Where(x => Peek().Type == x).Any();
 
-    private Expr Expression() => Equality();
+    private Expr Expression() => Comma();
+    private Expr Comma() => MakeBinaryMatch(Equality, TokenType.Comma);
     private Expr Equality() => MakeBinaryMatch(Comparision, TokenType.BangEqual, TokenType.EqualEqual);
     private Expr Comparision() => MakeBinaryMatch(Term, TokenType.Greater, TokenType.GreaterEqual, TokenType.Less, TokenType.LessEqual);
     private Expr Term() => MakeBinaryMatch(Factor, TokenType.Plus, TokenType.Minus);
