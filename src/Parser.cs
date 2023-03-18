@@ -2,6 +2,8 @@ using Lox.Ast;
 
 namespace Lox;
 
+public class ParseException : Exception { }
+
 public class Parser
 {
     public List<Token> Tokens { get; }
@@ -12,13 +14,32 @@ public class Parser
         Tokens = tokens;
     }
 
-    public Expr Expression() => Equality();
-    public Expr Equality() => MakeBinaryMatch(Comparision, TokenType.BangEqual, TokenType.EqualEqual);
-    public Expr Comparision() => MakeBinaryMatch(Term, TokenType.Greater, TokenType.GreaterEqual, TokenType.Less, TokenType.LessEqual);
-    public Expr Term() => MakeBinaryMatch(Factor, TokenType.Plus, TokenType.Minus);
-    public Expr Factor() => MakeBinaryMatch(Unary, TokenType.Star, TokenType.Slash);
+    public Expr? Parse()
+    {
+        try
+        {
+            return Expression();
+        }
+        catch (ParseException)
+        {
+            return null;
+        }
+    }
 
-    public Expr Unary()
+    private bool IsAtEnd() => Peek().Type == TokenType.EOF;
+    private Token Advance() => Tokens[IsAtEnd() ? Current : ++Current];
+    private Token Previous() => Tokens[Current - 1];
+    private Token Peek() => Tokens[Current];
+    private bool Check(TokenType type) => !IsAtEnd() && Peek().Type == type;
+    private bool Check(params TokenType[] types) => !IsAtEnd() && types.Where(x => Peek().Type == x).Any();
+
+    private Expr Expression() => Equality();
+    private Expr Equality() => MakeBinaryMatch(Comparision, TokenType.BangEqual, TokenType.EqualEqual);
+    private Expr Comparision() => MakeBinaryMatch(Term, TokenType.Greater, TokenType.GreaterEqual, TokenType.Less, TokenType.LessEqual);
+    private Expr Term() => MakeBinaryMatch(Factor, TokenType.Plus, TokenType.Minus);
+    private Expr Factor() => MakeBinaryMatch(Unary, TokenType.Star, TokenType.Slash);
+
+    private Expr Unary()
     {
         if (Match(TokenType.Bang, TokenType.Minus))
         {
@@ -30,7 +51,7 @@ public class Parser
         return Primary();
     }
 
-    public Expr Primary()
+    private Expr Primary()
     {
         if (Match(TokenType.False)) return new LiteralExpr("false");
         if (Match(TokenType.True)) return new LiteralExpr("true");
@@ -62,13 +83,6 @@ public class Parser
 
         return expr;
     }
-
-    private bool IsAtEnd() => Peek().Type == TokenType.EOF;
-    private Token Advance() => Tokens[IsAtEnd() ? Current : ++Current];
-    private Token Previous() => Tokens[Current - 1];
-    public Token Peek() => Tokens[Current];
-    public bool Check(TokenType type) => !IsAtEnd() && Peek().Type == type;
-    public bool Check(params TokenType[] types) => !IsAtEnd() && types.Where(x => Peek().Type == x).Any();
 
     private bool Match(params TokenType[] types)
     {
@@ -119,8 +133,4 @@ public class Parser
             Advance();
         }
     }
-}
-
-public class ParseException : Exception
-{
 }

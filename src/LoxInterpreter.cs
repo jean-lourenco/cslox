@@ -13,7 +13,7 @@ public static class LoxInterpreter
         {
             Console.Write("> ");
             var line = Console.ReadLine();
-            if (line == null)
+            if (line == null || line == "quit")
                 break;
             Run(line);
             _hadError = false;
@@ -40,11 +40,12 @@ public static class LoxInterpreter
         var scanner = new Scanner(program);
         var parser = new Parser(scanner.ScanTokens().ToList());
         var astPrinter = new AstPrinter();
+        var ast = parser.Parse();
 
-        // TODO: Tentar converter Scan e Parser em IEnumerable
-        // TODO: Considerar criar uma função Parse ao invés de chamar Expression
+        if (_hadError || ast == null)
+            return;
 
-        Console.WriteLine(astPrinter.Print(parser.Expression()));
+        Console.WriteLine(astPrinter.Print(ast));
     }
 
     public static void RunDebugPrompt()
