@@ -1,3 +1,4 @@
+using System.Globalization;
 using FluentAssertions;
 using Lox;
 using Xunit;
@@ -56,7 +57,6 @@ string""";
         var tokens = scanner.ScanTokens().ToList();
 
         tokens.Should().HaveCount(1);
-        // LoxEntryPoint.HasErrors.Should().BeTrue();
     }
 
     [Theory]
@@ -69,7 +69,7 @@ string""";
 
         tokens.Should().HaveCount(2);
         tokens[0].Type.Should().Be(TokenType.Number);
-        tokens[0].Literal.Should().Be(double.Parse(literalNumber));
+        tokens[0].Literal.Should().Be(double.Parse(literalNumber, NumberStyles.Any, GlobalConfig.DefaultNumberFormat));
         tokens[1].Type.Should().Be(TokenType.EOF);
     }
 

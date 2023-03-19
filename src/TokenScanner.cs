@@ -1,3 +1,5 @@
+using System.Globalization;
+
 namespace Lox;
 
 public enum TokenType
@@ -183,7 +185,7 @@ public class Scanner
         }
 
         var raw = _source.Substring(_start, _current - _start);
-        var success = double.TryParse(raw, out var literal);
+        var success = double.TryParse(raw, NumberStyles.Any, GlobalConfig.DefaultNumberFormat, out var literal);
 
         if (!success)
         {
