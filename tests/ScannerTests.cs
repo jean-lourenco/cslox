@@ -156,4 +156,27 @@ string""";
         tokens[14].Type.Should().Be(TokenType.Var);
         tokens[15].Type.Should().Be(TokenType.While);
     }
+
+    [Fact]
+    public void Scanner_should_handle_single_char_tokens()
+    {
+        var program = "( ) { } , . - + ; / * ? :";
+        var scanner = new Scanner(program);
+        var tokens = scanner.ScanTokens().ToList();
+
+        tokens.Should().HaveCount(14);
+        tokens[0].Type.Should().Be(TokenType.LeftParen);
+        tokens[1].Type.Should().Be(TokenType.RightParen);
+        tokens[2].Type.Should().Be(TokenType.LeftBrace);
+        tokens[3].Type.Should().Be(TokenType.RightBrace);
+        tokens[4].Type.Should().Be(TokenType.Comma);
+        tokens[5].Type.Should().Be(TokenType.Dot);
+        tokens[6].Type.Should().Be(TokenType.Minus);
+        tokens[7].Type.Should().Be(TokenType.Plus);
+        tokens[8].Type.Should().Be(TokenType.Semicolon);
+        tokens[9].Type.Should().Be(TokenType.Slash);
+        tokens[10].Type.Should().Be(TokenType.Star);
+        tokens[11].Type.Should().Be(TokenType.Question);
+        tokens[12].Type.Should().Be(TokenType.Colon);
+    }
 }
